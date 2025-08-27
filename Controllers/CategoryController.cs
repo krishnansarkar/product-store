@@ -22,5 +22,13 @@ namespace ProductStore.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Create(Category category)
+        {
+            _db.Add<Category>(category);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
