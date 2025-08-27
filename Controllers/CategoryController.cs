@@ -17,5 +17,10 @@ namespace ProductStore.Controllers
 
             return View(categories);
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 }
