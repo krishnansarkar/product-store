@@ -26,9 +26,14 @@ namespace ProductStore.Controllers
         [HttpPost]
         public IActionResult Create(Category category)
         {
-            _db.Add<Category>(category);
-            _db.SaveChanges();
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                _db.Add<Category>(category);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View();
         }
     }
 }
