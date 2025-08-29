@@ -30,6 +30,7 @@ namespace ProductStore.Controllers
             {
                 _db.Add<Category>(category);
                 _db.SaveChanges();
+                TempData["success"] = $"Category \"{category.Name}\" created successfully.";
                 return RedirectToAction("Index");
             }
 
@@ -59,6 +60,7 @@ namespace ProductStore.Controllers
             {
                 _db.Update<Category>(category);
                 _db.SaveChanges();
+                TempData["success"] = $"Category \"{category.Name}\" updated successfully.";
                 return RedirectToAction("Index");
             }
 
@@ -97,6 +99,7 @@ namespace ProductStore.Controllers
 
             _db.Remove<Category>(category);
             _db.SaveChanges();
+            TempData["success"] = $"Category \"{category.Name}\" deleted successfully.";
             return RedirectToAction("Index");
         }
     }
