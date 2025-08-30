@@ -1,13 +1,6 @@
 ﻿@model List<Category>
 <div class="container">
-    @if (TempData["success"] != null)
-    {
-        <div class="row pt-4 pb-3">
-            <div class="alert alert-success" role="alert">
-                @TempData["success"]
-            </div>
-        </div>
-    }
+    <partial name="_Notification"/>
     <div class="row pt-4 pb-3">
         <div class="col-6">
             Category List
