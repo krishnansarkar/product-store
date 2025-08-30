@@ -1,8 +1,8 @@
 ﻿@if (TempData["success"] != null)
 {
-    <div class="row pt-4 pb-3">
-        <div class="alert alert-success" role="alert">
-            @TempData["success"]
-        </div>
-    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"> </script>
+    <script type="text/javascript">
+        toastr["success"]('@TempData["success"]');
+    </script>
 }
