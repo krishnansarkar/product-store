@@ -1,28 +1,29 @@
 ﻿@model Category
-<div class="container">
-    <form method="post">
-        <div class="border p-3">
-            <div class="row pb-2">
-                <h2>Delete Category</h2>
-                <hr />
-            </div>
-            <div asp-validation-summary="All"></div>
-            <div class="mb-3">
-                <label asp-for="Name" class="pb-1"></label>
-                <input asp-for="Name" class="form-control" disabled/>
-            </div>
-            <div class="mb-3">
-                <label asp-for="DisplayOrder" class="pb-1"></label>
-                <input asp-for="DisplayOrder" class="form-control" disabled/>
-            </div>
-            <div class="row">
-                <div class="col-6 col-md-3">
-                    <button type="submit" class="btn btn-danger form-control">Delete Category</button>
+<div class="card">
+    <div class="card-header">
+        <h2>Delete Category</h2>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            <div class="border p-3">
+                <div asp-validation-summary="All"></div>
+                <div class="mb-3">
+                    <label asp-for="Name" class="pb-1"></label>
+                    <input asp-for="Name" class="form-control" disabled/>
                 </div>
-                <div class="col-6 col-md-3">
-                    <a asp-controller="Category" asp-action="Index" class="btn btn-outline-secondary form-control">Return to Category List</a>
+                <div class="mb-3">
+                    <label asp-for="DisplayOrder" class="pb-1"></label>
+                    <input asp-for="DisplayOrder" class="form-control" disabled/>
+                </div>
+                <div class="row">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-danger form-control">Delete Category</button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="Category" asp-action="Index" class="btn btn-outline-secondary form-control">Return to Category List</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
