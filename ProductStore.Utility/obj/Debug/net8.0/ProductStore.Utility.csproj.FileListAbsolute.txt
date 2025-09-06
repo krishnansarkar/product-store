@@ -1,0 +1,12 @@
+C:\Users\sarka\Documents\WebDev\C#\ProductStoreSolution\ProductStore.Utility\bin\Debug\net8.0\ProductStore.Utility.deps.json
+C:\Users\sarka\Documents\WebDev\C#\ProductStoreSolution\ProductStore.Utility\bin\Debug\net8.0\ProductStore.Utility.dll
+C:\Users\sarka\Documents\WebDev\C#\ProductStoreSolution\ProductStore.Utility\bin\Debug\net8.0\ProductStore.Utility.pdb
+C:\Users\sarka\Documents\WebDev\C#\ProductStoreSolution\ProductStore.Utility\obj\Debug\net8.0\ProductStore.Utility.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sarka\Documents\WebDev\C#\ProductStoreSolution\ProductStore.Utility\obj\Debug\net8.0\ProductStore.Utility.AssemblyInfoInputs.cache
+C:\Users\sarka\Documents\WebDev\C#\ProductStoreSolution\ProductStore.Utility\obj\Debug\net8.0\ProductStore.Utility.AssemblyInfo.cs
+C:\Users\sarka\Documents\WebDev\C#\ProductStoreSolution\ProductStore.Utility\obj\Debug\net8.0\ProductStore.Utility.csproj.CoreCompileInputs.cache
+C:\Users\sarka\Documents\WebDev\C#\ProductStoreSolution\ProductStore.Utility\obj\Debug\net8.0\ProductStore.Utility.sourcelink.json
+C:\Users\sarka\Documents\WebDev\C#\ProductStoreSolution\ProductStore.Utility\obj\Debug\net8.0\ProductStore.Utility.dll
+C:\Users\sarka\Documents\WebDev\C#\ProductStoreSolution\ProductStore.Utility\obj\Debug\net8.0\refint\ProductStore.Utility.dll
+C:\Users\sarka\Documents\WebDev\C#\ProductStoreSolution\ProductStore.Utility\obj\Debug\net8.0\ProductStore.Utility.pdb
+C:\Users\sarka\Documents\WebDev\C#\ProductStoreSolution\ProductStore.Utility\obj\Debug\net8.0\ref\ProductStore.Utility.dll
