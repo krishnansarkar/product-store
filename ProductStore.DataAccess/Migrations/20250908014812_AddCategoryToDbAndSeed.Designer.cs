@@ -11,8 +11,8 @@ using ProductStore.DataAccess.Data;
 namespace ProductStore.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250823023224_SeedCategoryTable")]
-    partial class SeedCategoryTable
+    [Migration("20250908014812_AddCategoryToDbAndSeed")]
+    partial class AddCategoryToDbAndSeed
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,7 +37,8 @@ namespace ProductStore.DataAccess.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(24)
+                        .HasColumnType("nvarchar(24)");
 
                     b.HasKey("Id");
 
