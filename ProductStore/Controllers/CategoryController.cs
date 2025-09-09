@@ -1,19 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ProductStore.DataAccess.Data;
+using ProductStore.DataAccess.Repository.IRepository;
 using ProductStore.Models;
 
 namespace ProductStore.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ApplicationDbContext _db;
-        public CategoryController(ApplicationDbContext db)
+        private readonly ICategoryRepository _categoryRepository;
+        public CategoryController(ICategoryRepository categoryRepository)
         {
-            _db = db;
+            _categoryRepository = categoryRepository;
         }
         public IActionResult Index()
         {
-            List<Category> categories = _db.Categories.ToList();
+            List<Category> categories = _categoryRepository.GetAll().ToList();
 
             return View(categories);
         }
@@ -28,8 +28,8 @@ namespace ProductStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                _db.Add<Category>(category);
-                _db.SaveChanges();
+                _categoryRepository.Add(category);
+                _categoryRepository.Save();
                 TempData["success"] = $"Category \"{category.Name}\" created successfully.";
                 return RedirectToAction("Index");
             }
@@ -44,7 +44,7 @@ namespace ProductStore.Controllers
                 return NotFound();
             }
 
-            var category = _db.Categories.Find(id);
+            var category = _categoryRepository.Get(u => u.Id == id);
             if (category == null)
             {
                 return NotFound();
@@ -58,8 +58,8 @@ namespace ProductStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                _db.Update<Category>(category);
-                _db.SaveChanges();
+                _categoryRepository.Update(category);
+                _categoryRepository.Save();
                 TempData["success"] = $"Category \"{category.Name}\" updated successfully.";
                 return RedirectToAction("Index");
             }
@@ -74,7 +74,7 @@ namespace ProductStore.Controllers
                 return NotFound();
             }
 
-            var category = _db.Categories.Find(id);
+            var category = _categoryRepository.Get(u => u.Id == id);
             if (category == null)
             {
                 return NotFound();
@@ -91,14 +91,14 @@ namespace ProductStore.Controllers
                 return NotFound();
             }
 
-            var category = _db.Categories.Find(id);
+            var category = _categoryRepository.Get(u => u.Id == id);
             if (category == null)
             {
                 return NotFound();
             }
 
-            _db.Remove<Category>(category);
-            _db.SaveChanges();
+            _categoryRepository.Remove(category);
+            _categoryRepository.Save();
             TempData["success"] = $"Category \"{category.Name}\" deleted successfully.";
             return RedirectToAction("Index");
         }
