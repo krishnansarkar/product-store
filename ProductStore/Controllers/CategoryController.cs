@@ -6,14 +6,14 @@ namespace ProductStore.Web.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ICategoryRepository _categoryRepository;
-        public CategoryController(ICategoryRepository categoryRepository)
+        private readonly IUnitOfWork _unitOfWork;
+        public CategoryController(IUnitOfWork unitOfWork)
         {
-            _categoryRepository = categoryRepository;
+            _unitOfWork = unitOfWork;
         }
         public IActionResult Index()
         {
-            List<Category> categories = _categoryRepository.GetAll().ToList();
+            List<Category> categories = _unitOfWork.Category.GetAll().ToList();
 
             return View(categories);
         }
@@ -28,8 +28,8 @@ namespace ProductStore.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _categoryRepository.Add(category);
-                _categoryRepository.Save();
+                _unitOfWork.Category.Add(category);
+                _unitOfWork.Save();
                 TempData["success"] = $"Category \"{category.Name}\" created successfully.";
                 return RedirectToAction("Index");
             }
@@ -44,7 +44,7 @@ namespace ProductStore.Web.Controllers
                 return NotFound();
             }
 
-            var category = _categoryRepository.Get(u => u.Id == id);
+            var category = _unitOfWork.Category.Get(u => u.Id == id);
             if (category == null)
             {
                 return NotFound();
@@ -58,8 +58,8 @@ namespace ProductStore.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _categoryRepository.Update(category);
-                _categoryRepository.Save();
+                _unitOfWork.Category.Update(category);
+                _unitOfWork.Save();
                 TempData["success"] = $"Category \"{category.Name}\" updated successfully.";
                 return RedirectToAction("Index");
             }
@@ -74,7 +74,7 @@ namespace ProductStore.Web.Controllers
                 return NotFound();
             }
 
-            var category = _categoryRepository.Get(u => u.Id == id);
+            var category = _unitOfWork.Category.Get(u => u.Id == id);
             if (category == null)
             {
                 return NotFound();
@@ -91,14 +91,14 @@ namespace ProductStore.Web.Controllers
                 return NotFound();
             }
 
-            var category = _categoryRepository.Get(u => u.Id == id);
+            var category = _unitOfWork.Category.Get(u => u.Id == id);
             if (category == null)
             {
                 return NotFound();
             }
 
-            _categoryRepository.Remove(category);
-            _categoryRepository.Save();
+            _unitOfWork.Category.Remove(category);
+            _unitOfWork.Save();
             TempData["success"] = $"Category \"{category.Name}\" deleted successfully.";
             return RedirectToAction("Index");
         }
