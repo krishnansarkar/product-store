@@ -1,8 +1,8 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using ProductStore.Models;
+using System.Diagnostics;
 
-namespace ProductStore.Controllers
+namespace ProductStore.Web.Controllers
 {
     public class HomeController : Controller
     {
