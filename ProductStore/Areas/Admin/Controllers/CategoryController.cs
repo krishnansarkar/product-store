@@ -2,7 +2,7 @@
 using ProductStore.DataAccess.Repository.IRepository;
 using ProductStore.Models;
 
-namespace ProductStore.Web.Controllers
+namespace ProductStore.Web.Areas.Admin.Controllers
 {
     public class CategoryController : Controller
     {
