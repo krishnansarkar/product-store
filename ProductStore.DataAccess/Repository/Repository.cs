@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace ProductStore.DataAccess.Repository
 {
-    public class Repository<T> : IRespository<T> where T : class
+    public class Repository<T> : IRepository<T> where T : class
     {
         private ApplicationDbContext _db;
         private DbSet<T> _dbSet;

@@ -2,7 +2,7 @@
 
 namespace ProductStore.DataAccess.Repository.IRepository
 {
-    public interface ICategoryRepository : IRespository<Category>
+    public interface ICategoryRepository : IRepository<Category>
     {
         void Update(Category category);
     }
