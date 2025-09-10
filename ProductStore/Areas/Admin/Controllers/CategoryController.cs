@@ -4,6 +4,7 @@ using ProductStore.Models;
 
 namespace ProductStore.Web.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
