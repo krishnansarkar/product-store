@@ -38,5 +38,35 @@ namespace ProductStore.Web.Areas.Admin.Controllers
             }
             return View();
         }
+
+        public IActionResult Edit(int id)
+        {
+            if (id == 0)
+            {
+                return NotFound();
+            }
+
+            var product = _unitOfWork.Product.Get(u => u.Id == id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            return View(product);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.Product.Update(product);
+                _unitOfWork.Save();
+                TempData["success"] = $"Category \"{product.Title}\" updated successfully.";
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
     }
 }
