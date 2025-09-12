@@ -20,5 +20,23 @@ namespace ProductStore.Web.Areas.Admin.Controllers
 
             return View(products);
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.Product.Add(product);
+                _unitOfWork.Save();
+                TempData["success"] = $"Product \"{product.Title}\" created successfully.";
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
     }
 }
