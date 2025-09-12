@@ -22,12 +22,13 @@
                 {
                     <tr>
                         <td>@obj.Title</td>
-                        <td><table class="table table-bordered">
+                        <td><table class="table">
                             <tr><td style="w-50">ISBN:</td><td>@obj.ISBN</td></tr>
                             <tr><td>Author</td><td>@obj.Author</td></tr>
                             <tr><td>Price(1-49)</td><td>@obj.Price.ToString("C")</td></tr>
                             <tr><td>Price(50-99)</td><td>@obj.Price50.ToString("C")</td></tr>
                             <tr><td>Price(100+)</td><td>@obj.Price100.ToString("C")</td></tr>
+                            <tr><td>Description</td><td>@obj.Description</td></tr>
                         </table></td>
                         <td><div class="btn-group w-75" role="group">
                             <a asp-controller="Product" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-primary">
