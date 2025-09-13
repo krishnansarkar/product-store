@@ -30,7 +30,8 @@ namespace ProductStore.DataAccess.Data
                     Author = "Stephen King",
                     Price = 9.99,
                     Price50 = 8.99,
-                    Price100 = 7.99
+                    Price100 = 7.99,
+                    CategoryId = 1
                 }
             );
         }
