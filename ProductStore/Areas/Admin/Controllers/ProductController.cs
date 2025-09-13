@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using ProductStore.DataAccess.Repository.IRepository;
 using ProductStore.Models;
 
@@ -23,6 +24,14 @@ namespace ProductStore.Web.Areas.Admin.Controllers
 
         public IActionResult Create()
         {
+            IEnumerable<SelectListItem> categoryList = _unitOfWork.Category.GetAll().Select(c => new SelectListItem
+            {
+                Text = c.Name,
+                Value = c.Id.ToString()
+            });
+
+            ViewBag.CategoryList = categoryList;
+
             return View();
         }
 
