@@ -23,7 +23,7 @@ namespace ProductStore.Web.Areas.Admin.Controllers
             return View(products);
         }
 
-        public IActionResult Create()
+        public IActionResult Upsert(int? id)
         {
             ProductVM productVM = new()
             {
@@ -31,55 +31,34 @@ namespace ProductStore.Web.Areas.Admin.Controllers
                 CategoryList = GetCategoryList()
             };
 
-            return View(productVM);
-        }
-
-        [HttpPost]
-        public IActionResult Create(ProductVM productVM)
-        {
-            if (ModelState.IsValid)
+            if (id != null && id != 0)
             {
-                _unitOfWork.Product.Add(productVM.Product);
-                _unitOfWork.Save();
-                TempData["success"] = $"Product \"{productVM.Product.Title}\" created successfully.";
-                return RedirectToAction("Index");
+                productVM.Product = _unitOfWork.Product.Get(u => u.Id == id);
+                if (productVM.Product == null)
+                {
+                    return NotFound();
+                }
             }
-
-            productVM.CategoryList = GetCategoryList();
-
-            return View(productVM);
-        }
-
-        public IActionResult Edit(int id)
-        {
-            if (id == 0)
-            {
-                return NotFound();
-            }
-
-            var product = _unitOfWork.Product.Get(u => u.Id == id);
-            if (product == null)
-            {
-                return NotFound();
-            }
-
-            ProductVM productVM = new()
-            {
-                Product = product,
-                CategoryList = GetCategoryList()
-            };
 
             return View(productVM);
         }
 
         [HttpPost]
-        public IActionResult Edit(ProductVM productVM)
+        public IActionResult Upsert(ProductVM productVM, int? id)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Product.Update(productVM.Product);
+                if (id != null && id != 0)
+                {
+                    _unitOfWork.Product.Update(productVM.Product);
+                    TempData["success"] = $"Product \"{productVM.Product.Title}\" updated successfully.";
+                }
+                else
+                {
+                    _unitOfWork.Product.Add(productVM.Product);
+                    TempData["success"] = $"Product \"{productVM.Product.Title}\" created successfully.";
+                }
                 _unitOfWork.Save();
-                TempData["success"] = $"Category \"{productVM.Product.Title}\" updated successfully.";
                 return RedirectToAction("Index");
             }
 
