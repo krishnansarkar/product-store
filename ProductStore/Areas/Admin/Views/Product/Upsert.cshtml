@@ -4,7 +4,7 @@
         <h2>@(Model.Product.Id == 0 ? "Create" : "Edit") Product</h2>
     </div>
     <div class="card-body">
-        <form method="post">
+        <form method="post" onsubmit="syncQuillContent()">
             <input type="hidden" asp-for="Product.Id" />
             <div class="border p-3">
                 <div asp-validation-summary="All"></div>
@@ -15,8 +15,8 @@
                 </div>
                 <div class="mb-3">
                     <label asp-for="Product.Description" class="pb-1"></label>
-                    <input asp-for="Product.Description" class="form-control" />
-                    <span asp-validation-for="Product.Description" class="text-danger"></span>
+                    <div id="editor">@Html.Raw(Model.Product.Description)</div>
+                    <input type="hidden" id="quillContent" name="Product.Description" />
                 </div>
                 <div class="mb-3">
                     <label asp-for="Product.ISBN" class="pb-1"></label>
@@ -65,7 +65,27 @@
     </div>
 </div>
 
+@section Styles {
+    <style>
+        .ql-snow {
+            background-color: #fff;
+        }
+        .ql-snow * {
+            background-color:#fff;
+            color:#000;
+        }
+    </style>
+}
+
 @section Scripts {
+    <script>
+        const quill = new Quill('#editor', {
+          theme: 'snow'
+        });
+        function syncQuillContent() {
+            document.getElementById('quillContent').value = quill.root.innerHTML;
+        }
+    </script>
     @{
         <partial name="_ValidationScriptsPartial"/>
     }

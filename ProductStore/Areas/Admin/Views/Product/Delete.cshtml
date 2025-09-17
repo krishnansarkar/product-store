@@ -13,7 +13,7 @@
                 </div>
                 <div class="mb-3">
                     <label asp-for="Product.Description" class="pb-1"></label>
-                    <input asp-for="Product.Description" class="form-control" disabled />
+                    <div class="form-control" style="pointer-events: none; color: #7a8288; background-color: #ccc;">@Html.Raw(Model.Product.Description)</div>
                 </div>
                 <div class="mb-3">
                     <label asp-for="Product.ISBN" class="pb-1"></label>
