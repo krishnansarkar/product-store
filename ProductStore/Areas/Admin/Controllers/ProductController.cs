@@ -10,10 +10,12 @@ namespace ProductStore.Web.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         IUnitOfWork _unitOfWork;
+        IWebHostEnvironment _webHostEnvironment;
 
-        public ProductController(IUnitOfWork unitOfWork)
+        public ProductController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public IActionResult Index()
@@ -44,10 +46,34 @@ namespace ProductStore.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Upsert(ProductVM productVM, int? id)
+        public IActionResult Upsert(ProductVM productVM, int? id, IFormFile file)
         {
             if (ModelState.IsValid)
             {
+                if (file != null)
+                {
+                    string wwwrootPath = _webHostEnvironment.WebRootPath;
+                    string productPath = Path.Combine(wwwrootPath, "images", "products");
+
+                    if (productVM.Product.ImageUrl != null)
+                    {
+                        var oldImagePath = Path.Combine(wwwrootPath, productVM.Product.ImageUrl.TrimStart('\\'));
+                        if (System.IO.File.Exists(oldImagePath))
+                        {
+                            System.IO.File.Delete(oldImagePath);
+                        }
+                    }
+
+                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    var filePath = Path.Combine(productPath, fileName);
+
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                        productVM.Product.ImageUrl = Path.Combine("\\images", "products", fileName);
+                    }
+                }
+
                 if (id != null && id != 0)
                 {
                     _unitOfWork.Product.Update(productVM.Product);

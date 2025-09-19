@@ -12,8 +12,8 @@
         <table class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th>Product</th>
-                    <th>Properties</th>
+                    <th class="col-3">Product</th>
+                    <th class="col-9">Properties</th>
                     <th></th>
                 </tr>
             </thead>
@@ -21,7 +21,12 @@
                 @foreach (var obj in Model)
                 {
                     <tr>
-                        <td>@obj.Title</td>
+                        <td>
+                            <table>
+                                <tr><td>@obj.Title</td></tr>
+                                <tr><td><img src="@obj.ImageUrl" class="img-fluid"/></td></tr>
+                            </table>
+                        </td>
                         <td><table class="table">
                             <tr><td style="w-50">ISBN:</td><td>@obj.ISBN</td></tr>
                             <tr><td>Author</td><td>@obj.Author</td></tr>
