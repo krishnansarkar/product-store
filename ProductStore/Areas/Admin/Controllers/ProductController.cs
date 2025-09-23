@@ -128,6 +128,13 @@ namespace ProductStore.Web.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            List<Product> products = _unitOfWork.Product.GetAll(includeProperties: "Category").ToList();
+            return Json(new { data = products });
+        }
+
         private IEnumerable<SelectListItem> GetCategoryList()
         {
             return _unitOfWork.Category.GetAll().Select(c => new SelectListItem
