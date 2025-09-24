@@ -57,11 +57,7 @@ namespace ProductStore.Web.Areas.Admin.Controllers
 
                     if (productVM.Product.ImageUrl != null)
                     {
-                        var oldImagePath = Path.Combine(wwwrootPath, productVM.Product.ImageUrl.TrimStart('\\'));
-                        if (System.IO.File.Exists(oldImagePath))
-                        {
-                            System.IO.File.Delete(oldImagePath);
-                        }
+                        DeleteImage(productVM.Product.ImageUrl);
                     }
 
                     var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
@@ -122,6 +118,8 @@ namespace ProductStore.Web.Areas.Admin.Controllers
             {
                 return NotFound();
             }
+            if (product.ImageUrl != null)
+                DeleteImage(product.ImageUrl);
             _unitOfWork.Product.Remove(product);
             _unitOfWork.Save();
             TempData["success"] = $"Product \"{product.Title}\" deleted successfully.";
@@ -142,6 +140,16 @@ namespace ProductStore.Web.Areas.Admin.Controllers
                 Text = c.Name,
                 Value = c.Id.ToString()
             });
+        }
+
+        private void DeleteImage(string imageUrl)
+        {
+            string wwwrootPath = _webHostEnvironment.WebRootPath;
+            var oldImagePath = Path.Combine(wwwrootPath, imageUrl.TrimStart('\\'));
+            if (System.IO.File.Exists(oldImagePath))
+            {
+                System.IO.File.Delete(oldImagePath);
+            }
         }
     }
 }
