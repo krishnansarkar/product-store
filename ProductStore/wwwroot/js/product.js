@@ -15,7 +15,17 @@ function loadDataTable() {
             { data: 'author' },
             { data: 'price' },
             { data: 'category.name' },
-            { data: 'category.id'}
+            {
+                data: 'id',
+                render: (data) => `<div class="btn-group w-100" role="group">
+                            <a href="/admin/product/upsert/` + data + `" class="btn btn-primary">
+                                <i class="bi bi-pencil-fill"></i> Edit
+                            </a>
+                            <a href="/admin/product/delete/` + data + `" class="btn btn-danger">
+                                <i class="bi bi-trash-fill"></i> Delete
+                            </a>
+                        </div>`
+            }
         ]
     });
 }
