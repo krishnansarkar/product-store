@@ -89,48 +89,35 @@ namespace ProductStore.Web.Areas.Admin.Controllers
             return View(productVM);
         }
 
-        public IActionResult Delete(int id)
-        {
-            if (id == 0)
-            {
-                return NotFound();
-            }
-            var product = _unitOfWork.Product.Get(u => u.Id == id);
-            if (product == null)
-            {
-                return NotFound();
-            }
-
-            ProductVM productVM = new()
-            {
-                Product = product,
-                CategoryList = GetCategoryList()
-            };
-
-            return View(productVM);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        public IActionResult DeletePOST(int id)
-        {
-            var product = _unitOfWork.Product.Get(u => u.Id == id);
-            if (product == null)
-            {
-                return NotFound();
-            }
-            if (product.ImageUrl != null)
-                DeleteImage(product.ImageUrl);
-            _unitOfWork.Product.Remove(product);
-            _unitOfWork.Save();
-            TempData["success"] = $"Product \"{product.Title}\" deleted successfully.";
-            return RedirectToAction("Index");
-        }
-
         [HttpGet]
         public IActionResult GetAll()
         {
             List<Product> products = _unitOfWork.Product.GetAll(includeProperties: "Category").ToList();
             return Json(new { data = products });
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            var product = _unitOfWork.Product.Get(u => u.Id == id);
+            if (product == null)
+            {
+                return Json(new
+                {
+                    success = false,
+                    message = "Error while deleting"
+                });
+            }
+            if (product.ImageUrl != null)
+                DeleteImage(product.ImageUrl);
+            _unitOfWork.Product.Remove(product);
+            _unitOfWork.Save();
+            return Json(new
+            {
+                success = true,
+                message = $"Product \"{product.Title}\" deleted successfully."
+            }
+            );
         }
 
         private IEnumerable<SelectListItem> GetCategoryList()
