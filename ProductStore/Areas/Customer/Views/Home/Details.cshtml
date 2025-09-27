@@ -1,0 +1,16 @@
+﻿@model Product
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="@Model.ImageUrl" class="img-fluid" alt="@Model.Title" style="max-height: 500px; object-fit: cover;">
+        </div>
+        <div class="col-md-6">
+            <h2>@Model.Title</h2>
+            <h4>by @Model.Author</h4>
+            <p class="lead">Price: @Model.Price.ToString("c")</p>
+            <p class="lead">As Low As: @Model.Price100.ToString("c")</p>
+            <p>@Html.Raw(@Model.Description)</p>
+            <a asp-action="Index" class="btn btn-primary">Back to List</a>
+        </div>
+    </div>
+</div>
