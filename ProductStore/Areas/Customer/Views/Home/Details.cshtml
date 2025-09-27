@@ -7,8 +7,21 @@
         <div class="col-md-6">
             <h2>@Model.Title</h2>
             <h4>by @Model.Author</h4>
-            <p class="lead">Price: @Model.Price.ToString("c")</p>
-            <p class="lead">As Low As: @Model.Price100.ToString("c")</p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="col-4 text-center">(1-49)</th>
+                        <th class="col-4 text-center">(50-99)</th>
+                        <th class="col-4 text-center">(100+)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-center">@Model.Price.ToString("c")</td>
+                        <td class="text-center">@Model.Price50.ToString("c")</td>
+                        <td class="text-center">@Model.Price100.ToString("c")</td>
+                    </tr>
+            </table>
             <p>@Html.Raw(@Model.Description)</p>
             <a asp-action="Index" class="btn btn-primary">Back to List</a>
         </div>
