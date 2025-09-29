@@ -10,19 +10,26 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th class="col-4 text-center">(1-49)</th>
-                        <th class="col-4 text-center">(50-99)</th>
-                        <th class="col-4 text-center">(100+)</th>
+                        <th class="col-3 text-center">Quantity</th>
+                        <th class="col-3 text-center">(1-49)</th>
+                        <th class="col-3 text-center">(50-99)</th>
+                        <th class="col-3 text-center">(100+)</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
+                        <td class="text-center">Price</td>
                         <td class="text-center">@Model.Price.ToString("c")</td>
                         <td class="text-center">@Model.Price50.ToString("c")</td>
                         <td class="text-center">@Model.Price100.ToString("c")</td>
                     </tr>
             </table>
+            <p>@Model.Category.Name</p>
+            <p>ISBN: @Model.ISBN</p>
             <p>@Html.Raw(@Model.Description)</p>
+            <label for="quantity" class="form-label">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" value="1" min="1" class="form-control mb-3" style="width: 100px;" />
+            <a class="btn btn-success disabled">Add to Cart</a>
             <a asp-action="Index" class="btn btn-primary">Back to List</a>
         </div>
     </div>
