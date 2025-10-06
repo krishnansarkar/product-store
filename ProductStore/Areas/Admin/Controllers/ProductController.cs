@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ProductStore.DataAccess.Repository.IRepository;
 using ProductStore.Models;
@@ -7,6 +8,8 @@ using ProductStore.Models.ViewModels;
 namespace ProductStore.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
+
+    [Authorize(Roles = "Admin")]
     public class ProductController : Controller
     {
         IUnitOfWork _unitOfWork;
